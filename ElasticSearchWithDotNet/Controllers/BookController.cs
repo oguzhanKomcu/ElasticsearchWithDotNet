@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ElasticSearchWithDotNet.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BookController : ControllerBase
+    //[Route("api/[controller]")]
+    //[ApiController]
+    public class BookController : BaseController
     {
         private readonly IBookService _bookService;
 
