@@ -1,20 +1,29 @@
 ﻿using ElasticSearchWithDotNet.Dtos;
 using ElasticSearchWithDotNet.Repository;
+using System.Net;
 
 namespace ElasticSearchWithDotNet.Services
 {
-    public class BookService
+    public class BookService : IBookService
     {
-        private readonly BookRepository _bookRepository;
+        private readonly IBookRepository _bookRepository;
 
-        public BookService(BookRepository bookRepository )
+        public BookService(IBookRepository bookRepository)
         {
-           _bookRepository = bookRepository;   
+            _bookRepository = bookRepository;
         }
 
-        public async Task SaveAsync(BookCreateDto request)
+        public async Task<ResponseDto<BookDto>> SaveAsync(BookCreateDto request)
         {
-            var response = _bookRepository.SaveAsync(request.CreateBook());
+            var response = await _bookRepository.SaveAsync(request.CreateBook());
+
+            if (response == null)
+            {
+
+                return ResponseDto<BookDto>.Fail(new List<string> { "kayıt esnasında bir hata meydana geldi." }, System.Net.HttpStatusCode. InternalServerError);
+            }
+
+            return ResponseDto<BookDto>.Succes(response.CreateDto(), HttpStatusCode.Created);
         }
 
     }

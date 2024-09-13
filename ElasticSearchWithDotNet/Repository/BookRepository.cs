@@ -3,7 +3,7 @@ using Nest;
 
 namespace ElasticSearchWithDotNet.Repository
 {
-    public class BookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly ElasticClient _elasticClient;
 
@@ -13,11 +13,11 @@ namespace ElasticSearchWithDotNet.Repository
         }
         public async Task<Book?> SaveAsync(Book newBook)
         {
-            var response = await _elasticClient.IndexAsync(newBook, x => x.Index("products"));
+            var response = await _elasticClient.IndexAsync(newBook, x => x.Index("books"));
             //fast fail
             if (!response.IsValid) return null;
             newBook.Id = response.Id;
-            return  newBook;
+            return newBook;
         }
     }
 }
