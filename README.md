@@ -6,7 +6,7 @@ In this repo, I have developed a sample project on how we can use the Elasticsea
 
 Using a JSON-based data format and built on a powerful Apache Lucene infrastructure, this tool offers near real-time data search capacity. Users benefit from this structure in many areas such as big data applications, log management, analysis systems and content management systems.
 
-![Elasticsearch Architecture](https://github.com/username/repository/blob/main/images/my-image.png)
+<img src="https://github.com/user-attachments/assets/647c4ffb-15a5-47e4-9bdd-d527b4f154ca" width="500" height="300">
 
 
 ## What is Elasticsearch used for?
@@ -24,6 +24,8 @@ Elasticsearch’s speed, scalability, and ability to index many types of content
 
 ## What are Elasticsearch Components?
 Elasticsearch consists of several core components that manage the processes of storing, indexing, and searching data. These components provide the distributed structure and scalability of the system. Here are the main components of Elasticsearch:
+
+<img src="https://github.com/user-attachments/assets/20119091-6ec1-44d3-83cc-f105ea28e1af" width="500" height="300">
 
  ### Cluster
  A cluster is the top-level structure in Elasticsearch, consisting of multiple nodes. A cluster manages all the data and indexes. Multiple nodes can run within a cluster, ensuring high availability and scalability of the data.
