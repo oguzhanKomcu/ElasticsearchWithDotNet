@@ -27,16 +27,16 @@ Elasticsearch consists of several core components that manage the processes of s
 
 <img src="https://github.com/user-attachments/assets/20119091-6ec1-44d3-83cc-f105ea28e1af" width="500" height="300">
 
- ### Cluster
+ - #### Cluster
  A top-level structure consisting of multiple nodes. Manages data and indices, ensuring high availability and scalability. Each cluster has a unique name, and all nodes must belong to the same cluster.
 
-### Node
+- #### Node
   An instance of Elasticsearch that stores data, indexes, and processes queries. Can operate independently or as part of a cluster. Nodes can serve different roles, such as Master Node or Data Node
 
-###  Index
+- ####  Index
  A collection of data stored in a structured format. Each index contains one or more shards and is used to store and query data.
 
-### Document
+- #### Document
 The smallest unit of data, stored in JSON format. Represents a record and has a unique identifier (ID). Stored within an index.
 
 ### Shard
@@ -61,5 +61,7 @@ Data structure used for fast full-text searches by mapping words to the document
 
 ### Elasticsearch Plugins
   Extend Elasticsearch functionality with additional features, such as data processing (Ingest Node) or security (X-Pack).
+
+ # Using Elasticsearch in .Net
  
 
