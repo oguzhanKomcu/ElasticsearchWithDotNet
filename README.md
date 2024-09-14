@@ -78,6 +78,9 @@ Data structure used for fast full-text searches by mapping words to the document
     "Username": "elastic",
     "Password": "changeme"
   }
-
-
 ```
+- I define this extension in program.cs.
+```c#
+builder.Services.AddElasticsearch(builder.Configuration);
+```
+- For post, delete, get, update and search operations, we first create our repository, then our service class and then our controller.
