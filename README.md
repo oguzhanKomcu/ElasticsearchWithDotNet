@@ -62,6 +62,22 @@ Data structure used for fast full-text searches by mapping words to the document
 ### Elasticsearch Plugins
   Extend Elasticsearch functionality with additional features, such as data processing (Ingest Node) or security (X-Pack).
 
- # Using Elasticsearch in .Net
- 
+## Using Elasticsearch in .Net
+- Elasticsearch is usually used in .NET projects with the NEST library. NEST is a high-level .NET client for Elasticsearch and makes it easy to interact with Elasticsearch. To do this, we first load the Nest library into our project.
+- We need to establish our connection to send a request to Elasticsearch and receive a response. For this, we create the connection in program.cs. I implemented this in program.cs by making an extension.
+```c#
+            var pool = new SingleNodeConnectionPool(new Uri(configuration.GetSection("Elastic")["Url"]!));
+            var settings = new ConnectionSettings(pool);
+            var client = new ElasticClient(settings);
+            services.AddSingleton(client);
+```
+ - I specify the URL information in the appsettings.json file.
+ ```json
+  "Elastic": {
+    "Url": "http://localhost:9200",
+    "Username": "elastic",
+    "Password": "changeme"
+  }
 
+
+```
