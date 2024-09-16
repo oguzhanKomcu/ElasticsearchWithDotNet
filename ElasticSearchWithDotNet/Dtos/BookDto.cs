@@ -1,7 +1,8 @@
 ﻿namespace ElasticSearchWithDotNet.Dtos
 {
-    public class BookDto
+    public record BookDto
     {
+
         public string Id { get; set; }
         public string Title { get; set; }
         public string Name { get; set; }
