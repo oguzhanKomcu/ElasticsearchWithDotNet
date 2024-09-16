@@ -64,6 +64,7 @@ Data structure used for fast full-text searches by mapping words to the document
 
 ## Using Elasticsearch in .Net
 - Elasticsearch is usually used in .NET projects with the NEST library. NEST is a high-level .NET client for Elasticsearch and makes it easy to interact with Elasticsearch. To do this, we first load the Nest library into our project.
+- If we are using the 8th version of Elasticsearch, the Elastic.Clients.Elasticsearch 8.1.1 library is more suitable, if it is lower, it is more suitable to use the Nest library.
 - We need to establish our connection to send a request to Elasticsearch and receive a response. For this, we create the connection in program.cs. I implemented this in program.cs by making an extension.
 ```c#
             var pool = new SingleNodeConnectionPool(new Uri(configuration.GetSection("Elastic")["Url"]!));
