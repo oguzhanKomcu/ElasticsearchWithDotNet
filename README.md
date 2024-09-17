@@ -86,7 +86,7 @@ builder.Services.AddElasticsearch(builder.Configuration);
 ```
 - For post, delete, get, update and search operations, we first create our repository, then our service class and then our controller.
 - In our Repository class, we add our Elasticsearch connection to the constructor.
-  ```c#
+```c#
   //The usage here is the constructor in the Nest library usage.
         private readonly ElasticClient _elasticClient;
         private const string indexName = "books";
@@ -97,7 +97,7 @@ builder.Services.AddElasticsearch(builder.Configuration);
 ```
 - If you do not specify an ID in Elasticsearch, Elasticsearch automatically creates a unique ID. We specify that the ID will be a guid ID in the book registration method to determine it ourselves.
 
-```c#
+```csharp
         public async Task<Book?> SaveAsync(Book newBook)
         {
             var response = await _elasticClient.IndexAsync(newBook, x => x.Index(indexName).Id(Guid.NewGuid().ToString()));
@@ -106,5 +106,42 @@ builder.Services.AddElasticsearch(builder.Configuration);
 
             newBook.Id = response.Id;
             return newBook;
+        }
+```
+
+#### Elasticsearch Search Feature
+- The search feature in Elasticsearch allows you to search on one or more indexes. Elasticsearch's powerful search capabilities allow you to perform text search, filtering, and sorting operations quickly and effectively.
+#### How to do a search?
+- SearchRequest: An object used to define the search query. SearchRequest contains which indexes to search, the query type, search criteria, and other parameters.
+
+- MultiMatchQuery: This query type is used to search for the search term in more than one field. The fields parameter specifies which fields to search. The Type parameter specifies the query type, and the Operator parameter defines how the search terms will be combined.
+
+- Async/Await: Searches made with Elasticsearch are generally performed asynchronously, so the await keyword is used to wait for the result of the SearchAsync method.
+```csharp
+        public async Task<List<Book>> Search(string searchText)
+        {
+            /*For the query we will make, we specify in which indexes and
+               fields the incoming words will be searched with the SearchRequest class.*/
+            var searchRequest = new SearchRequest(indexName)
+            {
+                Size = 10000,
+                Query = new MultiMatchQuery
+                {
+                    Query = searchText,
+                    Fields = Infer.Fields<Book>(p => p.Description, p => p.Name),
+                    Type = TextQueryType.CrossFields,
+                    Operator = Operator.And
+                }
+            };
+
+
+            var searchResponse = await _elasticClient.SearchAsync<Book>(searchRequest);
+
+            foreach (var hit in searchResponse.Hits)
+            {
+                hit.Source.Id = hit.Id;
+            };
+
+            return searchResponse.Documents.ToList();
         }
 ```
