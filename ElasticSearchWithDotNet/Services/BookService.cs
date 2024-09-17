@@ -1,7 +1,6 @@
 ﻿using ElasticSearchWithDotNet.Dtos;
 using ElasticSearchWithDotNet.Models;
 using ElasticSearchWithDotNet.Repository;
-using Nest;
 using System.Net;
 
 namespace ElasticSearchWithDotNet.Services
@@ -84,6 +83,29 @@ namespace ElasticSearchWithDotNet.Services
             }
             return ResponseDto<bool>.Succes(true, HttpStatusCode.NoContent);
 
+        }
+
+        public async Task<ResponseDto<List<Book>>> Search(string searchText)
+        {
+            var response = await _bookRepository.Search(searchText);
+
+            if (response == null)
+            {
+
+                return ResponseDto<List<Book>>.Fail(new List<string> { "Kitap listesi getirilme esnasında bir hata meydana geldi." }, System.Net.HttpStatusCode.InternalServerError);
+            }
+
+            var books = response.Select(x => new BookDto()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                Title = x.Title,
+                Author = x.Author,
+            });
+
+
+            return ResponseDto<List<Book>>.Succes(response, HttpStatusCode.Accepted);
         }
     }
 }

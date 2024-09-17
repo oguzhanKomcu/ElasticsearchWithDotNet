@@ -74,5 +74,12 @@ namespace ElasticSearchWithDotNet.Controllers
 
             return CreateActionResult(result);
         }
+
+        [HttpGet("search/{searchText}")] // Search metodu için
+        public async Task<IActionResult> Search(string searchText)
+        {
+            var result = await _bookService.Search(searchText);
+            return CreateActionResult(result);
+        }
     }
 }

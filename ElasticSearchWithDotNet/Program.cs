@@ -1,5 +1,4 @@
-using Elasticsearch.Net;
-using Nest;
+
 using ElasticSearchWithDotNet.Extensions;
 using ElasticSearchWithDotNet.Services;
 using ElasticSearchWithDotNet.Repository;

@@ -1,6 +1,5 @@
 ﻿using ElasticSearchWithDotNet.Dtos;
 using ElasticSearchWithDotNet.Models;
-using Nest;
 
 namespace ElasticSearchWithDotNet.Repository
 {
@@ -11,5 +10,6 @@ namespace ElasticSearchWithDotNet.Repository
         Task<Book> GetById(string id);
         Task<bool> Delete(string id);
         Task<bool> Update(BookUpdateDto bookUpdateDto);
+        Task<List<Book>> Search(string searchText);
     }
 }

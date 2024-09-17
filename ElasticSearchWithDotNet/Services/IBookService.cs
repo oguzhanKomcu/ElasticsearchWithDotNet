@@ -10,5 +10,6 @@ namespace ElasticSearchWithDotNet.Services
         Task<ResponseDto<BookDto>> GetById(string Id);
         Task<ResponseDto<bool>> DeleteAsync(string id);
         Task<ResponseDto<bool>> Update(BookUpdateDto updateDto);
+        Task<ResponseDto<List<Book>>> Search(string searchText);
     }
 }

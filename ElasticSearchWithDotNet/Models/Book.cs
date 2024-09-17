@@ -1,12 +1,12 @@
 ﻿using ElasticSearchWithDotNet.Dtos;
-using Nest;
+
 
 namespace ElasticSearchWithDotNet.Models
 {
     public class Book
     {
 
-        [PropertyName("_id")]
+
         public string Id { get; set; }
         public string Title { get; set; }
         public string Name { get; set; }
